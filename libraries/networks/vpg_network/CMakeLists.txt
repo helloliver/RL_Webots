@@ -16,7 +16,7 @@ target_include_directories(vpg_network PRIVATE ${CONTROLLER_PATH} ${PARAMETERS_P
 # Link the PyTorch libraries
 target_link_libraries(vpg_network "${TORCH_LIBRARIES}")
 
-set_property(TARGET vpg_network PROPERTY CXX_STANDARD 11)
+set_property(TARGET vpg_network PROPERTY CXX_STANDARD 17)
 
 # The following code block is suggested to be used on Windows.
 # According to https://github.com/pytorch/pytorch/issues/25457,

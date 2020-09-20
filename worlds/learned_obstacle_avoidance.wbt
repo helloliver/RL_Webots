@@ -1,6 +1,7 @@
-#VRML_SIM R2020a utf8
+#VRML_SIM R2020b utf8
 WorldInfo {
   basicTimeStep 8
+  coordinateSystem "NUE"
   lineScale 0.05
   contactProperties [
     ContactProperties {
@@ -12,8 +13,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.00032259533168366796 0.7031169061809662 0.7110741959702646 3.1422306242127007
-  position 0.032327726197468154 2.6940283690489477 -0.0019851336983633394
+  orientation 0.3461374473733603 0.9184630524903703 0.19134912786821293 5.199571079574336
+  position -2.3874247565752604 1.363138886773213 1.5810275095366275
   follow "Khepera_IV"
   followType "None"
 }
@@ -42,7 +43,9 @@ DirectionalLight {
 DEF K4 Khepera4 {
   name "Khepera_IV"
   controller "vpg_controller"
-  controllerArgs "training"
+  controllerArgs [
+    "training"
+  ]
   supervisor TRUE
 }
 DEF OBST_0 Solid {

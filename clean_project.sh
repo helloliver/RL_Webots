@@ -1,7 +1,7 @@
 #!/bin/bash
 echo ""
 echo -e "\033[1;33mCleaning the PyTorch shared object...\033[0m"
-cd - 
+#cd - 
 cd ./libraries/networks/vpg_network
 rm -r build
 cd ../..
