@@ -32,12 +32,12 @@ public:
    * Convert the state to a string.
    * t = 0 (PREV_STATE) is previous, = 1 (CURRENT_STATE) is last measured
    */
-  std::string to_string(uint t = CURRENT_STATE);
+  std::string to_string(uint32_t t = CURRENT_STATE);
 
   /**
    * t = 0 (PREV_STATE) is previous, = 1 (CURRENT_STATE) is last measured
    */
-  std::vector<double> get_state(uint t = CURRENT_STATE);
+  std::vector<double> get_state(uint32_t t = CURRENT_STATE);
   t_state get_states();
   t_state step();
 

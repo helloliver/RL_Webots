@@ -19,15 +19,15 @@ void State::measure() {
   m_states[CURRENT_STATE] = state;
 }
 
-std::string State::to_string(uint t) {
+std::string State::to_string(uint32_t t) {
   std::string string = "";
-  for (uint i = 0; i < this->m_states[t].size(); i++) {
+  for (uint32_t i = 0; i < this->m_states[t].size(); i++) {
     string += std::to_string(this->m_states[t][i]) + " ";
   }
   return string;
 }
 
-std::vector<double> State::get_state(uint t) {
+std::vector<double> State::get_state(uint32_t t) {
   return this->m_states.at(t);
 }
 
@@ -42,7 +42,7 @@ t_state State::step() {
 
 void State::reset() {
   // Set the default starting state (all 0)
-  for (uint i = 0; i < STATE_DIM; i++) {
+  for (uint32_t i = 0; i < STATE_DIM; i++) {
     this->m_states[0].at(i) = 0.;
     this->m_states[1].at(i) = 0.;
   }

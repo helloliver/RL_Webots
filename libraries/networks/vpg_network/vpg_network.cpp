@@ -38,7 +38,7 @@ void vpg_w::compute_reward_to_go() {
   double rtg = 0.;
   if (vpg::memory.empty())
     return;
-  for (uint i = vpg::memory.size() - 1; i >= 0; i--) {
+  for (uint32_t i = vpg::memory.size() - 1; i >= 0; i--) {
     rtg = vpg::memory[i].reward + GAMMA * rtg;
     vpg::memory[i].reward_to_go = rtg;
     if (i == 0)
@@ -46,7 +46,7 @@ void vpg_w::compute_reward_to_go() {
   }
 }
 
-uint vpg_w::get_memory_size() {
+uint32_t vpg_w::get_memory_size() {
   return vpg::memory.size();
 }
 
@@ -61,7 +61,7 @@ void vpg_w::reset_memory() {
 std::vector<float> vpg_w::eval_policy(std::vector<double> state) {
   torch::Tensor proba = vpg::policy_model->forward(torch::_cast_Float(vpg::convert_state_to_batch(state)));
   std::vector<float> action(ACTION_DIM, 0.0F);
-  for (uint i = 0; i < ACTION_DIM; i++) {
+  for (uint32_t i = 0; i < ACTION_DIM; i++) {
     action.at(i) = proba[0][i].item().toFloat();
   }
   return action;
@@ -71,7 +71,7 @@ float vpg_w::eval_value_function(std::vector<double> state) {
   return vpg::value_model->forward(torch::_cast_Float(vpg::convert_state_to_batch(state))).item().toFloat();
 }
 
-void vpg_w::train(uint batch_size) {
+void vpg_w::train(uint32_t batch_size) {
   if (vpg::memory.size() == 0) {
     std::cout << "\033[1;33m[WARNING] memory empty, training aborted.\033[0m" << std::endl;
     return;
@@ -86,7 +86,7 @@ void vpg_w::train(uint batch_size) {
   }
 
   // Split the memory into batches and compute the gradients on each batch sequentially
-  for (uint i = 0;; i++) {
+  for (uint32_t i = 0;; i++) {
     // std::cout << "Processing batch: " << i << std::endl;
     if (batch_size >= vpg::memory.size()) {  // Batch size is at least as large as the memory
       vpg::memory_batch = std::vector<VPG_episode>(vpg::memory.begin(), vpg::memory.end());
@@ -137,7 +137,7 @@ void vpg_w::_create_path(std::string path) {
   system(command.c_str());
 }
 
-void vpg_w::save(std::string path, std::string file, uint model) {
+void vpg_w::save(std::string path, std::string file, uint32_t model) {
   if (!_dir_exists(path))
     _create_path(path);
 
@@ -157,7 +157,7 @@ void vpg_w::save(std::string path, std::string file, uint model) {
   }
 }
 
-bool vpg_w::load(std::string file, uint model) {
+bool vpg_w::load(std::string file, uint32_t model) {
   // Load the model
   try {
     if (model == POLICY) {
@@ -215,7 +215,7 @@ torch::Tensor vpg::ValueImpl::forward(torch::Tensor x) {
 
 std::vector<std::vector<double>> vpg::get_state_from_memory_batch(bool next) {
   std::vector<std::vector<double>> states;
-  for (uint i = 0; i < vpg::memory_batch.size(); i++) {
+  for (uint32_t i = 0; i < vpg::memory_batch.size(); i++) {
     if (!next) {
       states.push_back(vpg::memory_batch[i].state);
     } else {
@@ -227,7 +227,7 @@ std::vector<std::vector<double>> vpg::get_state_from_memory_batch(bool next) {
 
 torch::Tensor vpg::get_action_from_memory_batch() {
   std::vector<double> actions;
-  for (uint i = 0; i < vpg::memory_batch.size(); i++) {
+  for (uint32_t i = 0; i < vpg::memory_batch.size(); i++) {
     actions.push_back(vpg::memory_batch[i].action[0]);
     actions.push_back(vpg::memory_batch[i].action[1]);
   }
@@ -236,7 +236,7 @@ torch::Tensor vpg::get_action_from_memory_batch() {
 
 torch::Tensor vpg::get_reward_from_memory_batch() {
   std::vector<double> rewards;
-  for (uint i = 0; i < vpg::memory_batch.size(); i++) {
+  for (uint32_t i = 0; i < vpg::memory_batch.size(); i++) {
     rewards.push_back(vpg::memory_batch[i].reward);
   }
   return torch::_cast_Float(torch::tensor(rewards).view({-1, 1}));
@@ -244,7 +244,7 @@ torch::Tensor vpg::get_reward_from_memory_batch() {
 
 torch::Tensor vpg::get_reward_to_go_from_memory_batch() {
   std::vector<double> rtg;
-  for (uint i = 0; i < vpg::memory_batch.size(); i++) {
+  for (uint32_t i = 0; i < vpg::memory_batch.size(); i++) {
     rtg.push_back(vpg::memory_batch[i].reward_to_go);
   }
   return torch::_cast_Float(torch::tensor(rtg).view({-1, 1}));
@@ -255,7 +255,7 @@ torch::Tensor vpg::convert_state_to_batch(std::vector<double> state) {
 }
 torch::Tensor vpg::convert_state_to_batch(std::vector<std::vector<double>> states) {
   torch::Tensor t = vpg::convert_state_to_batch(states[0]);
-  for (uint i = 1; i < states.size(); i++) {
+  for (uint32_t i = 1; i < states.size(); i++) {
     t = torch::cat({t, vpg::convert_state_to_batch(states[i])}, /*dim=*/0);
   }
   return t;
@@ -308,7 +308,7 @@ int vpg::compute_gradients() {
   torch::Tensor policy_loss = -torch::log(actions) * advantage;
 
   // Compute the backward pass on each component of the loss {N,1}
-  for (uint i = 0; i < policy_loss.size(0); i++) {
+  for (uint32_t i = 0; i < policy_loss.size(0); i++) {
     policy_loss[i][0].backward(/*gradient*/ {}, /*keep_graph*/ true);
     policy_loss[i][1].backward(/*gradient*/ {}, /*keep_graph*/ true);
   }

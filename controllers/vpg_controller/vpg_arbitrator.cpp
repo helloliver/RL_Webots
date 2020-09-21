@@ -123,7 +123,7 @@ int VPG_arbitrator::_eval_step() {
     std::cout << std::setprecision(2);
     std::cout << "State: " << this->m_last_states.to_string(CURRENT_STATE) << std::endl;
     std::cout << "Action: ";
-    for (uint i = 0; i < ACTION_DIM; i++) {
+    for (uint32_t i = 0; i < ACTION_DIM; i++) {
       std::cout << this->m_current_action[i] << ",";
     }
     if (USE_VALUE_FUNCTION)

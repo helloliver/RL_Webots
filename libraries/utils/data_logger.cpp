@@ -40,7 +40,7 @@ void write_line(std::string file, std::vector<std::string> values) {
     outfile.open(file, std::ios::app);  // append
 
     std::string line = "";
-    for (uint i = 0; i < values.size(); i++) {
+    for (uint32_t i = 0; i < values.size(); i++) {
       line += values.at(i);
       if (i < values.size() - 1)
         line += ",";
@@ -54,7 +54,7 @@ void write_line(std::string file, std::vector<std::string> values) {
 }
 void write_line(std::string file, std::vector<double> values) {
   std::vector<std::string> str_values;
-  for (uint i = 0; i < values.size(); i++) {
+  for (uint32_t i = 0; i < values.size(); i++) {
     str_values.push_back(std::to_string(values[i]));
   }
   write_line(file, str_values);
@@ -68,7 +68,7 @@ int read_last_rollout(std::string file) {
   std::ifstream fin;
   fin.open(file);
   if (fin.is_open()) {
-    uint num_lines = 0;
+    uint32_t num_lines = 0;
     // Find the last line
     std::string prev_line = "";
     std::string line = "";
@@ -89,7 +89,7 @@ int read_last_rollout(std::string file) {
     // Extract the first value
     char del = ',';
     int c = 0;
-    for (uint i = 0; i < line.length(); i++) {
+    for (uint32_t i = 0; i < line.length(); i++) {
       if (line[i] == del) {
         c = i;
         break;
@@ -108,7 +108,7 @@ int read_last_particle(std::string file) {
   std::ifstream fin;
   fin.open(file);
   if (fin.is_open()) {
-    uint num_lines = 0;
+    uint32_t num_lines = 0;
     // Find the last line
     std::string prev_line = "";
     std::string line = "";
@@ -129,10 +129,10 @@ int read_last_particle(std::string file) {
     // Extract the last evaluated particle
     // Find second and third delimiter locations
     char del = ',';
-    uint del_count = 0;
-    uint first_del = 0;
-    uint sec_del = 0;
-    for (uint i = 0; i < line.length(); i++) {
+    uint32_t del_count = 0;
+    uint32_t first_del = 0;
+    uint32_t sec_del = 0;
+    for (uint32_t i = 0; i < line.length(); i++) {
       if (line[i] == del) {
         del_count++;
         if (del_count == 2)

@@ -44,7 +44,7 @@ DEF K4 Khepera4 {
   name "Khepera_IV"
   controller "vpg_controller"
   controllerArgs [
-    "training"
+    "eval"
   ]
   supervisor TRUE
 }

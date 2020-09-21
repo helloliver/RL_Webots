@@ -28,9 +28,9 @@ namespace vpg_w {
   void compute_reward_to_go();
 
   /**
-   * @return (uint) number of episodes currently stored.
+   * @return (uint32_t) number of episodes currently stored.
    */
-  uint get_memory_size();
+  uint32_t get_memory_size();
 
   /**
    * @return (std::vector<VPG_episode>) get the memory's reference.
@@ -58,9 +58,9 @@ namespace vpg_w {
 
   /**
    * Train the network based on the currently stored episodes.
-   * @param batch_size (uint) Number of episodes to use in a single batch.
+   * @param batch_size (uint32_t) Number of episodes to use in a single batch.
    */
-  void train(uint batch_size = 100);
+  void train(uint32_t batch_size = 100);
 
   /**
    * Get the maximum loss.
@@ -89,15 +89,15 @@ namespace vpg_w {
    * Save the model into the specified file
    * @param path (std::string) path to the file
    * @param file (std::string) path to the file + file name
-   * @param model (uint) whether to save the policy network (POLICY=0) or the value function network (VALUE=1)
+   * @param model (uint32_t) whether to save the policy network (POLICY=0) or the value function network (VALUE=1)
    */
-  void save(std::string path, std::string file, uint model);
+  void save(std::string path, std::string file, uint32_t model);
 
   /**
    * Load the model from the specified file
    * @param file (std::string) path to the file + file name
-   * @param model (uint) whether to load the policy network (POLICY=0) or the value function network (VALUE=1)
+   * @param model (uint32_t) whether to load the policy network (POLICY=0) or the value function network (VALUE=1)
    * @return (bool) whether loading has succeeded.
    */
-  bool load(std::string file, uint model);
+  bool load(std::string file, uint32_t model);
 }  // namespace vpg_w
