@@ -1,4 +1,7 @@
-# RL_Webots
+# Webots Deep Reinforcement Learning
+
+**Frked from [LucasWaelti/RL_Webots](https://github.com/LucasWaelti/RL_Webots)**
+
 This repository shows how Deep Reinforcement Learning can be used within Webots. This project was developed under Linux. While it should be possible to use it with other operating systems, this was not tested. 
 
 The code presented in this repository was adapted from a semester project at the [Distributed Intelligent Systems and Algorithms Laboratory (DISAL)](https://www.epfl.ch/labs/disal/). A summary of the project can be found [here](https://disalw3.epfl.ch/teaching/student_projects/ay_2019-20/ws/DISAL-SP133_summary.pdf). The part presented here is about **Deep Reinforcement Learning**, leveraging **Policy Gradient** to train a fully connected, feed forward neural network to solve a simple **obstacle avoidance task** on a **continuous action space** with a Khepera IV robot. 
