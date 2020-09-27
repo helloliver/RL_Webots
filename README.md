@@ -1,6 +1,6 @@
 # Webots Deep Reinforcement Learning
 
-**Frked from [LucasWaelti/RL_Webots](https://github.com/LucasWaelti/RL_Webots)**
+**Forked from [LucasWaelti/RL_Webots](https://github.com/LucasWaelti/RL_Webots)**
 
 This repository shows how Deep Reinforcement Learning can be used within Webots. This project was developed under Linux. While it should be possible to use it with other operating systems, this was not tested. 
 
