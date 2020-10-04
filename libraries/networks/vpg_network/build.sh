@@ -1,6 +1,8 @@
 # Build the target 
 mkdir build 
 cd build
+# Change this path to point to your libtorch installation 
+export LIBTORCH_PATH=/home/$(whoami)/Documents/PyTorch/libtorch # <- CHANGE ME! 
 cmake -DCMAKE_PREFIX_PATH=$LIBTORCH_PATH ..
 make
 
